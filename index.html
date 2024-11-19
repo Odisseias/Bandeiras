@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandeiras Semanais da Equipa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #0044cc;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, textarea, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .color-indicators {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .color-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+        }
+        .red { background-color: red; }
+        .yellow { background-color: yellow; }
+        .green { background-color: green; }
+        .blue { background-color: blue; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        button {
+            background-color: #0044cc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0033a0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bandeiras Semanais da Equipa</h1>
+        <p>Registe e acompanhe o bem-estar da sua equipa de forma contínua.</p>
+    </header>
+    <main>
+        <div class="container">
+            <form id="weeklyForm">
+                <div class="form-group">
+                    <label for="teamMember">Membro da Equipa</label>
+                    <input type="text" id="teamMember" placeholder="Digite o nome do membro" required>
+                </div>
+                <div class="form-group">
+                    <label for="weekColor">Bandeira da Semana</label>
+                    <select id="weekColor" required>
+                        <option value="red">Bandeira Vermelha</option>
+                        <option value="yellow">Bandeira Amarela</option>
+                        <option value="green">Bandeira Verde</option>
+                        <option value="blue">Bandeira Azul</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reason">Razão da Escolha</label>
+                    <textarea id="reason" rows="4" placeholder="Breve descrição do motivo da escolha" required></textarea>
+                </div>
+                <button type="submit">Registar Semana</button>
+            </form>
+
+            <div class="color-indicators">
+                <div class="color-indicator"><div class="color-box red"></div> Bandeira Vermelha</div>
+                <div class="color-indicator"><div class="color-box yellow"></div> Bandeira Amarela</div>
+                <div class="color-indicator"><div class="color-box green"></div> Bandeira Verde</div>
+                <div class="color-indicator"><div class="color-box blue"></div> Bandeira Azul</div>
+            </div>
+
+            <h2>Registos Semanais</h2>
+            <table id="recordsTable">
+                <thead>
+                    <tr>
+                        <th>Membro</th>
+                        <th>Bandeira</th>
+                        <th>Motivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Registos aparecerão aqui -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        const form = document.getElementById('weeklyForm');
+        const tableBody = document.querySelector('#recordsTable tbody');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const member = document.getElementById('teamMember').value;
+            const color = document.getElementById('weekColor').value;
+            const reason = document.getElementById('reason').value;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${member}</td>
+                <td><div class="color-box ${color}"></div></td>
+                <td>${reason}</td>
+            `;
+
+            tableBody.appendChild(row);
+
+            form.reset();
+        });
+    </script>
+</body>
+</html>
+
